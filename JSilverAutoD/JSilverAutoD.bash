@@ -21,10 +21,10 @@ matchs() {
 	string="$1"
 	substring="$2"
 	if test "${string#*$substring}" != "$string"; then
-		echo "Yes"
+		#echo "Yes"
 		return 0    # $substring is in $string
 	else
-		echo "No"
+		#echo "No"
 	return 1    # $substring is not in $string
 	fi
 }
