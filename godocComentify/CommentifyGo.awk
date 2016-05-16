@@ -1,3 +1,6 @@
+# This skips the first 4 lines of Copyright
+{
+if(NR > 4)
 {
 	# Heruistic value for character limit
 	char_limit = 79
@@ -9,7 +12,7 @@
 	# Check the presence of "//" at the beggining of the line ($0)
 	# Also checks that there are several words on the line (NF > 2)
 	# And that the line doesnt contain the word Copyright
-	if( $0 ~ "^//" && NF > 2 && $1 !~ "Copyright" )
+	if( $0 ~ "^//" && NF > 2)
 	{
 		# Clear trailing spaces on comment blocks
 		gsub(/ *$/,"",$0)
@@ -55,6 +58,13 @@
 	else
 	{
 		# print the line as regular
+		gsub(/\w {1,}$/,"",$0)
 		print $0
 	}
+}
+else
+{
+	gsub(/\w {1,}$/,"",$0)
+	print $0
+}
 }
