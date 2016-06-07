@@ -1,0 +1,28 @@
+export GOPATH=/home/damejia/Repositories
+export PATH=$PATH:$GOPATH/bin
+
+alias a='sh /home/damejia/android.sh'
+alias b='sh /home/damejia/bandroid.sh'
+
+alias rm='rm -vi'
+
+alias cp='cp -vi'
+alias mv='mv -vi'
+
+alias ls='ls -h --color=auto'
+alias ll='ls -l'
+alias la='ll -a'
+
+alias github='cd /home/damejia/Repositories/github.com'
+alias bitbucket='cd /home/damejia/Repositories/bitbucket.com'
+alias Muskin='cd /home/damejia/Repositories/bitbucket.com/MusKin/'
+alias ddaniel='cd /datos/Daniel'
+alias ddropbox='cd /home/damejia/Dropbox'
+alias ddacademicos='cd /home/damejia/Academicos'
+alias ddescargas='cd /home/damejia/Descargas'
+alias bbiofisica='cd /home/damejia/Dropbox/Biophysics_Research'
+alias Uundergrad='cd /home/damejia/Dropbox/1-Research/1-UndergradWritting'
+alias ifconfig='/sbin/ifconfig'
+
+alias gfif-cluster='ssh -X biofisica_user1@gfif'
+alias itm-cluster='ssh -X biofisicaudea@itm-cluster'
