@@ -1,0 +1,10 @@
+! This was here before anything
+Xcursor.theme: oxy-obsidian
+
+! Amount of lines to save in the prompt buffer
+*saveLines: 5024
+
+! Activate 256 Color support
+*customization: -color
+XTerm*termName:  xterm-256color
+
