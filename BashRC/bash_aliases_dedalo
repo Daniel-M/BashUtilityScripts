@@ -24,5 +24,9 @@ alias bbiofisica='cd /home/damejia/Dropbox/Biophysics_Research'
 alias Uundergrad='cd /home/damejia/Dropbox/1-Research/1-UndergradWritting'
 alias ifconfig='/sbin/ifconfig'
 
+
+alias ColoredTerminal='export TERM=xterm-256color'
+
+
 alias gfif-cluster='ssh -X biofisica_user1@gfif'
 alias itm-cluster='ssh -X biofisicaudea@itm-cluster'
