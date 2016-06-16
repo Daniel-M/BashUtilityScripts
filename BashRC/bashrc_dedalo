@@ -113,5 +113,7 @@ fi
 #Shorten path lenghts
 PROMPT_DIRTRIM=2
 
-#export TERM=xterm-256color
-
+# Add Xterm configfile if exist
+if [ -f $HOME/.Xdefaults ]; then
+  xrdb -merge $HOME/.Xdefaults
+fi

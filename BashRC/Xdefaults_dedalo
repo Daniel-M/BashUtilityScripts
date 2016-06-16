@@ -6,5 +6,6 @@ Xcursor.theme: oxy-obsidian
 
 ! Activate 256 Color support
 *customization: -color
-XTerm*termName:  xterm-256color
+! XTerm*termName:  xterm-256color
+xterm*termName:  xterm-256color
 
