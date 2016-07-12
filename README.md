@@ -7,7 +7,7 @@ Contains several configuration files related to my system custom settings.
 
 ## Utilities
 
-## Backup the installed packages list and the architectures added
+### Backup the installed packages list and the architectures added
 
 I use this after a fresh install of Debian, it creates a script that can be used to restore all presently installed
 packages
