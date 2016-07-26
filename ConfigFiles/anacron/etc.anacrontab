@@ -12,11 +12,8 @@ LOGNAME=root
 7	10	cron.weekly	run-parts --report /etc/cron.weekly
 @monthly	15	cron.monthly	run-parts --report /etc/cron.monthly
 # Update the flash-plugin-nonfree
-1	5	anacron.task.update-flash-plugin	update-flashplugin-nonfree --install
-# Update the package cache
-#1	6	anacron.task.update-apt-get	apt-get update
+1	7	anacron.task.update-flash-plugin    /bin/bash /root/update-flashplugin.sh
 # Execute the tasks of autocleaning, autoremoving, updating package cache and notify the user about it
 1	10	anacron.taks.update-clean-pkg-db /bin/bash /root/update-packages.sh
 # Update the database index of files to use locate command
 1	30	anacron.task.updatedb	/bin/bash /root/update-updatedb.sh
-
