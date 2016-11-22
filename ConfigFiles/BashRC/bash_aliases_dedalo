@@ -1,9 +1,6 @@
 export GOPATH=/home/damejia/Repositories
 export PATH=$PATH:$GOPATH/bin
 
-alias a='sh /home/damejia/android.sh'
-alias b='sh /home/damejia/bandroid.sh'
-
 alias rm='rm -vi'
 
 alias cp='cp -vi'
@@ -24,11 +21,7 @@ alias bbiofisica='cd /home/damejia/Dropbox/Biophysics_Research'
 alias Uundergrad='cd /home/damejia/Dropbox/1-Research/1-UndergradWritting'
 alias ifconfig='/sbin/ifconfig'
 
-
 alias ColoredTerminal='export TERM=xterm-256color'
-
-alias Popcorn-Time="./opt/Popcorn-Time-CE/Popcorn-Time-CE"
-
 
 alias gfif-cluster='ssh -X biofisica_user1@gfif'
 alias itm-cluster='ssh -X biofisicaudea@itm-cluster'
