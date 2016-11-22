@@ -18,8 +18,10 @@ shopt -s histappend
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 # Manually changed to have 15000 last commands on history
 # and last 20000 commands in the .bash_history file
-HISTSIZE=15000
-HISTFILESIZE=20000
+# Added time formating for the history of commands (with date and time)
+export HISTSIZE=15000
+export HISTFILESIZE=20000
+export HISTTIMEFORMAT="[%F %T] "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
