@@ -4,7 +4,7 @@ A set of bash scripts if find useful. I take ideas over the internet and then ad
 ### Backup the installed packages list and the architectures added
 
 I use this after a fresh install of Debian, it creates a script that can be used to restore all presently installed
-packagesi.
+packages.
 
 ## How to use.
 
