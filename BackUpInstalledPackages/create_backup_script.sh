@@ -18,11 +18,15 @@ awk '{print $1}' $packages > $packages.1
 sed ":a;/$/{N;s/\n/ /;ba}" $packages.1 > $packages.2
 # Check if other architectures are present
 # So the script adds them automatically
+rm -f $temp_add_arch
 if [[ $other_arch_cmd == "" ]]; then
     echo "Current architecture is $(dpkg --print-architecture)."
     echo "No more architectures found."
-else 
+    echo "apt-get update" >> $temp_add_arch
+    sed -i "s/^/apt-get install -y /g" $packages.2
+    cat $temp_add_arch $packages.2 > $bkfile
     rm -f $temp_add_arch
+else 
     echo "Current architecture is $(dpkg --print-architecture)."
     for i in $other_arch_cmd
     do
