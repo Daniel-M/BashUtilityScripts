@@ -89,10 +89,10 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -l'
-alias la='ls -A'
-alias ls='ls -CF'
-alias rm='rm -i'
+#alias ll='ls -l'
+#alias la='ls -A'
+#alias ls='ls -CF'
+#alias rm='rm -i'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -114,7 +114,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#Shorten path lenghts
+#Shorten path lenghts on prompt
 PROMPT_DIRTRIM=2
 
 # Add Xterm configfile if exist
