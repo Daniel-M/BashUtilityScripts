@@ -1,7 +1,4 @@
 # Add GOPATH for GO language
-#export GOPATH=/home/damejia/Repositories/go_code:/home/damejia/Repositories/github.com:/home/damejia/Repositories/bitbucket.org
-#export GOPATH=/home/damejia/Repositories/github.com:/home/damejia/Repositories/bitbucket.org
-#export GOPATH=/home/damejia/Repositories/go_code
 export GOPATH=/home/damejia/Repositories
 
 # Add Go bin path (created in the GOPATH/bin by GO
@@ -17,7 +14,6 @@ go_bin=$(echo $GOPATH | awk -F":" '{print $1}')
 export PATH=$PATH:$go_bin/bin
 
 # Add custom scripts
-export PATH=$PATH:/home/damejia/opt/go/bin
 export PATH=$PATH:/home/damejia/scripts
 
 # Adding handy aliases
@@ -31,15 +27,15 @@ alias ls='ls -h --color=auto'
 alias ll='ls -l'
 alias la='ll -a'
 
-alias bitbucket='cd /home/damejia/Repositories/bitbucket.org/Daniel-M'
-alias github='cd /home/damejia/Repositories/github.com/Daniel-M'
+alias bitbucket='cd /home/damejia/Repositories/src/bitbucket.org/Daniel-M'
+alias github='cd /home/damejia/Repositories//src/github.com/Daniel-M'
 alias ddropbox='cd /home/damejia/Dropbox'
 alias ddacademicos='cd /home/damejia/Academicos'
 alias ddescargas='cd /home/damejia/Descargas'
 alias bbiofisica='cd /home/damejia/Dropbox/1-Research/Biophysics_Research'
 alias Uundergrad='cd /home/damejia/Dropbox/1-Research/1-UndergradWritting'
 alias ifconfig='/sbin/ifconfig'
-alias Muskin='cd /home/damejia/Repositories/bitbucket.org/Daniel-M/MusKin'
+alias Muskin='cd /home/damejia/Repositories/src/bitbucket.org/Daniel-M/MusKin'
 
 alias Dualmonright='xrandr --output LVDS --auto --rotate normal --pos 0x0 --output CRT1 --auto --right-of LVDS'
 alias Dualmonleft='xrandr --output LVDS --auto --rotate normal --pos 0x0 --output CRT1 --auto --left-of LVDS'
