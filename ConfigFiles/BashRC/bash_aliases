@@ -50,3 +50,4 @@ alias BStochastic="mupdf '/home/damejia/Descargas/Libros_y_Articulos_Regados/(Sp
 
 alias BOksendal="mupdf '/home/damejia/Biophysics_Research/Undergraduate_Thesis/2-Bibliography/Oksendal_B._-_Stochastic_Differential_Equations_(5th_ed.).pdf'"
 
+alias CaPaper='cd /home/damejia/Repositories/src/bitbucket.org/Daniel-M/MathAspectsCaMuskin'
