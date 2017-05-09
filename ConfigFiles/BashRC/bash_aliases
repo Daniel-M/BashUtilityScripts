@@ -16,6 +16,9 @@ export PATH=$PATH:$go_bin/bin
 # Add custom scripts
 export PATH=$PATH:/home/damejia/scripts
 
+# Add Rust bin
+export PATH=$PATH:/home/damejia/.cargo/bin
+
 # Adding handy aliases
 
 alias rm='rm -vi'
@@ -33,7 +36,7 @@ alias ddropbox='cd /home/damejia/Dropbox'
 alias ddacademicos='cd /home/damejia/Academicos'
 alias ddescargas='cd /home/damejia/Descargas'
 alias bbiofisica='cd /home/damejia/Dropbox/1-Research/Biophysics_Research'
-alias Uundergrad='cd /home/damejia/Dropbox/1-Research/1-UndergradWritting'
+alias Uundergrad='cd /home/damejia/Dropbox/1-Research/1-Undergrad_Thesis/5-Writting'
 alias ifconfig='/sbin/ifconfig'
 alias Muskin='cd /home/damejia/Repositories/src/bitbucket.org/Daniel-M/MusKin'
 
