@@ -1,0 +1,3 @@
+#!/bin/bash
+file_ext=$1
+nvim $(find -type f -name "*.$file_ext" | awk 'BEGIN{text=""}{text=text" "$1} END{print text}')
