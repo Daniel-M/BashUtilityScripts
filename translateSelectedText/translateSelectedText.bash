@@ -25,8 +25,10 @@ if [[ -n "$original_text" && "${#original_text}" -le "$size_limit" ]]; then
 	original_text="$(xclip -selection primary -o | sed "{s/\n/ /g;s/\r/ /g}")"
 	translation_result=$(wget -U "Mozilla/5.0" -qO - "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=$(echo "$translated_to")&dt=t&q=$(echo $original_text | sed "{s/[\"'<>]//g}" )")
 	translated_text=$(echo $translation_result | sed '{s/\[//g;s/\]//g;s/\,\,\,/\",\"/g}' | awk -F "\",\"" '{print $1}' | sed 's/\"//')
-	translated_from=$(echo $translation_result | sed '{s/\[//g;s/\]//g;s/\,\,\,/\",\"/g}' | awk -F "\",\"" '{print $3}' | awk -F "," '{print $3}' | sed 's/\"//g')
+	#translated_from=$(echo $translation_result | sed '{s/\[//g;s/\]//g;s/\,\,\,/\",\"/g}' | awk -F "\",\"" '{print $3}' | awk -F "," '{print $5}' | sed 's/\"//g')
+	translated_from=$(echo $translation_result | sed '{s/\[//g;s/\]//g;s/\,\,\,/\",\"/g}' | awk -F "\"," '{print $3}' | awk -F "," '{print $5}' | sed 's/\"//g')
 	notify-send -u normal -i info "Clip text translator" "<b>Text on clip:</b> <i>$original_text</i>\n\n<b>Translation:</b> <i>$translated_text</i>\n\nTranslated from <b>$translated_from</b> to <b>$translated_to</b>" -t 10000
+    echo $translation_result > /home/damejia/trresult.log
 else
 	notify-send -u normal -i info "Clip text translator" "There is no text on the clip or it is greater than $size_limit characters." -t 10000
 fi
