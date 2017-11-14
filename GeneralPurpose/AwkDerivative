@@ -1,0 +1,6 @@
+#!/bin/bash
+file_name=$1
+colA=$2
+colB=$3
+#awk 'BEGIN{i=0}{t[i]=$colA;f[i]='$colB';i++}END{for(j=0;j<i;j++){print t[j]" "f[j]" "(f[j+1]-f[j])/(t[j+1]-t[j])}}' $file_name
+awk 'BEGIN{i=0}{t[i]=$1;f[i]=$2;i++}END{for(j=0;j<i;j++){print t[j]" "(f[j+1]-f[j])/(t[j+1]-t[j])}}' $file_name

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Simplified forms using awk
+pip3 install --upgrade $(pip3 list | awk '{printf(" %s ",$1)}')
+pip install --upgrade $(pip list | awk '{printf(" %s ",$1)}')
+pip3 install --upgrade $(pip3 list | awk '{printf(" %s ",$1)}')
