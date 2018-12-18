@@ -45,7 +45,7 @@ grepstory() {
   } # define is_file_exits function
  
  # call usage() function if filename not supplied
-	if [[ ! $1 -eq 0 ]]
+	if [[ ! -z $1 ]]
 	then
 		history | grep $1
 	else
@@ -61,7 +61,7 @@ nvimopen(){
   } # define is_file_exits function
 
   # call usage() function if filename not supplied
-	if [[ ! $1 -eq 0 ]]
+	if [[ ! -z $1 ]]
 	then
 		nvim $(find -type f -name "*.$1" | awk 'BEGIN{text=""}{text=text" "$1} END{print text}')
 	else
