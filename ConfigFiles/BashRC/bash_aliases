@@ -209,10 +209,12 @@ git_helper() {
     echo "Where [command] is any of,"
     echo " * last commit. Shows last commit"
     echo " * last branch. Shows last commit"
-    return 0
+    return 1
   } # define is_file_exits function
 
+  
   [[ $# -eq 0 ]] && usage
+  git fetch --all
   if [ "${1}" == "last" ]; then
     if [ "${2}" == "commit" ]; then
       git log --color --format="%C(magenta)%cr %C(bold red)%d%Creset %C(bold cyan)%H%Creset %s %C(bold blue)<%an>%Creset" | head -n 1
