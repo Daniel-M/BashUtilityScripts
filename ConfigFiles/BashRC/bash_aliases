@@ -32,9 +32,64 @@ export PATH=$PATH:$HOME/opt/esp/xtensa-esp32-elf/bin
 
 # Parallelo Go PATHs
 # Sets the gopath for parallelo
-set_go_path_parallelo(){
+set_gopath_parallelo(){
   export GOPATH="/home/damejia/Repositories/src/bitbucket.org/Daniel-M/PARALLELO.AI/Go"
   echo "Go path set to '$GOPATH'"
+}
+
+setup_goparallelo_gitlab(){
+  set_gopath_parallelo
+  cd "/home/damejia/Repositories/src/bitbucket.org/Daniel-M/PARALLELO.AI/Go/src/gitlab.com"
+}
+
+setup_goparallelo_bitbucket(){
+  set_gopath_parallelo
+  cd "/home/damejia/Repositories/src/bitbucket.org/Daniel-M/PARALLELO.AI/Go/src/bitbucket.org"
+}
+
+set_gopath_daniel(){
+  export GOPATH="/home/damejia/Repositories"
+  echo "Go path set to '$GOPATH'"
+}
+
+setup_godaniel_gitlab(){
+  set_gopath_daniel
+  cd "/home/damejia/Repositories/src/gitlab.com/Daniel-M"
+}
+
+setup_godaniel_github(){
+  set_gopath_daniel
+  cd "/home/damejia/Repositories/src/github/Daniel-M"
+}
+
+setup_godaniel_bitbucket(){
+  set_gopath_daniel
+  cd "/home/damejia/Repositories/src/bitbucket.org/Daniel-M"
+}
+
+set_nodedevelopment(){
+  export NODE_ENV="development"
+  echo "NODE_ENV path set to '$NODE_ENV'"
+}
+
+set_nodeproduction(){
+  export NODE_ENV="production"
+  echo "NODE_ENV path set to '$NODE_ENV'"
+}
+
+set_espidf_path(){
+  if [ -z ${IDF_PATH} ]; then
+    echo "IDF_PATH must be set before including this script."
+  else
+    IDF_ADD_PATHS_EXTRAS="${IDF_PATH}/components/esptool_py/esptool:${IDF_PATH}/components/espcoredump:${IDF_PATH}/components/partition_table/"
+    export PATH="${PATH}:${IDF_ADD_PATHS_EXTRAS}"
+    echo "Added to PATH: ${IDF_ADD_PATHS_EXTRAS}"
+  fi
+}
+
+setup_espidf() {
+  set_espidf_path
+  cd "/home/damejia/opt/esp/my_projects" 
 }
 
 # history + grep
@@ -43,30 +98,50 @@ grepstory() {
   usage(){
     echo "Usage: grepstory word"
   } # define is_file_exits function
- 
+
  # call usage() function if filename not supplied
-	if [[ ! -z $1 ]]
-	then
-		history | grep $1
-	else
-		usage
-	fi
+ if [[ ! -z $1 ]]
+ then
+   history | grep $1
+ else
+   usage
+ fi
+}
+
+# env + grep
+# grepenv word looks for "word" in the bash history
+grepenv() {
+  usage(){
+    echo "Usage: grepenv ENV_VAR_REGEXP"
+  } # define is_file_exits function
+
+ # call usage() function if filename not supplied
+ if [[ ! -z $1 ]]
+ then
+   env | grep $1
+ else
+   usage
+ fi
 }
 
 # neovim open
 # nvimopen ext opens all .ext files under the tree
-nvimopen(){
+nvim_open(){
   usage(){
     echo "Usage: nvimopen file extension without dot"
   } # define is_file_exits function
 
   # call usage() function if filename not supplied
-	if [[ ! -z $1 ]]
-	then
-		nvim $(find -type f -name "*.$1" | awk 'BEGIN{text=""}{text=text" "$1} END{print text}')
-	else
-		usage
-	fi	
+  if [[ ! -z $1 ]]
+  then
+    nvim $(find -type f -name "*.$1" | awk 'BEGIN{text=""}{text=text" "$1} END{print text}')
+  else
+    usage
+  fi
+}
+
+xc_pwd(){
+  pwd | sed 's/\r//g' | xclip -sel clip
 }
 
 xc_file_contents(){
@@ -86,8 +161,8 @@ xc_file_contents(){
   [[ $# -eq 0 ]] && usage # Invoke is_file_exits
   if ( is_file_exits "$1" )
   then
-		cat $1 | xclip -sel clip
-    cat $1 | xclip -sel primary 
+    cat $1 | xclip -sel clip
+    cat $1 | xclip -sel primary
     echo "Contents of file '$1' copied to clipboard"
   else
     echo "File $1 not found"
@@ -95,36 +170,69 @@ xc_file_contents(){
 }
 
 xc_readlink(){
-	#!/bin/bash
-	# file.sh: a sample shell script to demonstrate the concept of Bash shell functions
-	# define usage function
-	usage(){
-		echo "Usage: xc_readlink filename"
-	} # define is_file_exits function
-	# $f -> store argument passed to the script
-	is_file_exits(){
-		local f="$1"
-		[[ -f "$f" ]] && return 0 || return 1
-	}
-	# invoke usage
-	# call usage() function if filename not supplied
-	[[ $# -eq 0 ]] && usage # Invoke is_file_exits
-	if ( is_file_exits "$1" )
-	then
-		route=$(readlink -f $1)
-		echo -n $route | xclip -sel clip
-		echo -n $route | xclip -sel primary 
-		echo "Route to the file '$1' copied to clipboard"
-	else
-		echo "File $1 not found"
-	fi
+  #!/bin/bash
+  # file.sh: a sample shell script to demonstrate the concept of Bash shell functions
+  # define usage function
+  usage(){
+    echo "Usage: xc_readlink filename"
+  } # define is_file_exits function
+  # $f -> store argument passed to the script
+  is_file_exits(){
+    local f="$1"
+    [[ -f "$f" ]] && return 0 || return 1
+  }
+  # invoke usage
+  # call usage() function if filename not supplied
+  [[ $# -eq 0 ]] && usage # Invoke is_file_exits
+  if ( is_file_exits "$1" )
+  then
+    route=$(readlink -f $1)
+    echo -n $route | xclip -sel clip
+    echo -n $route | xclip -sel primary
+    echo "Route to the file '$1' copied to clipboard"
+  else
+    echo "File $1 not found"
+  fi
 }
 
 ## Show git branch in prompt
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[31m\]\$(parse_git_branch)\[\033[00m\]\$ "
+
+
+git_helper() {
+  usage(){
+    echo "Usage: git_aid [command]"
+    echo ""
+    echo "Where [command] is any of,"
+    echo " * last commit. Shows last commit"
+    echo " * last branch. Shows last commit"
+    return 0
+  } # define is_file_exits function
+
+  [[ $# -eq 0 ]] && usage
+  if [ "${1}" == "last" ]; then
+    if [ "${2}" == "commit" ]; then
+      git log --color --format="%C(magenta)%cr %C(bold red)%d%Creset %C(bold cyan)%H%Creset %s %C(bold blue)<%an>%Creset" | head -n 1
+    elif [ "${2}" == "branch" ]; then
+     git branch -r | grep -v HEAD | while read b; do git log --color  --format="%ci _%C(magenta)%cr %C(bold red)$b%d%Creset%C(bold cyan) %H%Creset %s %C(bold blue)<%an>%Creset" $b | head -n 1; done | sort -r | cut -d_ -f2- | sed 's;origin/;;g' | head -n 1
+    else
+      usage
+      echo ""
+      echo "Unrecognized command '$1'"
+    fi
+  elif [ "${1}" == "recent" ]; then
+    if [ "${2}" == "branches" ] || [ "${2}" == "commits" ]; then
+      git branch -r | grep -v HEAD | while read b; do git log --color --format="%ci _%C(magenta)%cr %C(bold red)$b%d%Creset%C(bold cyan) %H%Creset %s %C(bold blue)<%an>%Creset" $b | head -n 10; done | sort -r | cut -d_ -f2- | sed 's;origin/;;g' | head -n 10 
+    fi
+  else
+    usage
+    echo ""
+    echo "Unrecognized command '$1 $2'"
+  fi
+}
 
 # Adding handy aliases
 alias rm='rm -vi'
@@ -136,9 +244,13 @@ alias ls='ls -h --color=auto'
 alias ll='ls -l --color=auto'
 alias la='ll -a --color=auto'
 
+alias less='less -r'
+
 # Environment aliases
 alias bitbucket='cd /home/damejia/Repositories/src/bitbucket.org/Daniel-M'
-alias github='cd /home/damejia/Repositories//src/github.com/Daniel-M'
+alias github='cd /home/damejia/Repositories/src/github.com/Daniel-M'
+alias gitlab='cd /home/damejia/Repositories/src/gitlab.com/Daniel-M'
+alias gitlab_parallelo='cd /home/damejia/Repositories/src/bitbucket.org/Daniel-M/PARALLELO.AI/Go/src/gitlab.com'
 alias ddropbox='cd /home/damejia/Dropbox'
 alias ddescargas='cd /home/damejia/Descargas'
 
@@ -151,8 +263,6 @@ alias itm-cluster='ssh -X biofisicaudea@190.248.28.132'
 
 alias MongoIB='mongo -u admin -p xudmaster5. --authenticationDatabase admin'
 alias MongoBB='mongo --port 37017 -u admin -p papa123$. --authenticationDatabase admin --host 181.143.87.202'
-
-alias xc-pwd='pwd | xclip -sel clip'
 
 # Volatile aliases
 
